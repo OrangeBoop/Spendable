@@ -188,6 +188,8 @@ def render_signup_page(page: ft.Page, show_start_page_callback) -> None:
 
         print("Username:", username)
         print("Hashed password:", hashed_password)
+
+        page.clean()
     # endregion
 
     # region Connect Events
