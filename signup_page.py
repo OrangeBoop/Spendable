@@ -1,9 +1,9 @@
 import flet as ft
 import bcrypt
 
-
 def render_signup_page(page: ft.Page, show_start_page_callback) -> None:
     page.clean()
+    page.theme_mode='dark'
 
     # region Setting up our fields
     text_username: ft.TextField = ft.TextField(

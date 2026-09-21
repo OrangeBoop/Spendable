@@ -8,6 +8,7 @@ def main(page: ft.Page):
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.window_width = 400
+    page.theme_mode='dark'
     # endregion
 
     def show_start_page(e=None) -> None:
