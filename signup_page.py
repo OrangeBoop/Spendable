@@ -1,6 +1,12 @@
+
+#region Imports
 import flet as ft
 import bcrypt
+from database import SessionLocal, User # Imports Table Blueprints and Local Session
+from errorpage import error
+#endregion 
 
+# region signup
 def render_signup_page(page: ft.Page, show_start_page_callback) -> None:
     page.clean()
     page.theme_mode='dark'
@@ -37,7 +43,7 @@ def render_signup_page(page: ft.Page, show_start_page_callback) -> None:
         width=200,
         disabled=True
     )
-    # endregion
+# endregion
 
     # region Validation variables
     valid_username = False
@@ -185,11 +191,28 @@ def render_signup_page(page: ft.Page, show_start_page_callback) -> None:
             password.encode("utf-8"),
             bcrypt.gensalt()
         )
-
         print("Username:", username)
         print("Hashed password:", hashed_password)
+        session = SessionLocal()
+        try:
+            user_already_exists =(
+                session.query(User).filter_by(username=username).first()
+            )
+            if user_already_exists:
+                error(page,"u1",show_start_page_callback)
+                
+            new_user = User(username=username,password_hash=hashed_password)
+            session.add(new_user)
+            session.commit()
+            page.clean() # Should put us in menu page but that doesn't exist yet.
+        except Exception as ex:
+            session.rollback()  # Undo changes if something crashes
+            print(f"Error: {ex}")
+            #error page with error u2 (user creation failed)
+        finally:
+            session.close()  # Always close the session when done
 
-        page.clean()
+        
     # endregion
 
     # region Connect Events
@@ -213,7 +236,7 @@ def render_signup_page(page: ft.Page, show_start_page_callback) -> None:
                 ft.Container(height=5),
                 submit_button,
                 ft.Container(height=10),
-                ft.TextButton("Back to Home", on_click=lambda e: show_start_page_callback())
+                ft.Button(content="Back to Menu", on_click=lambda e: show_start_page_callback(page))
             ],
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
             spacing=5
@@ -221,3 +244,4 @@ def render_signup_page(page: ft.Page, show_start_page_callback) -> None:
     )
     page.update()
     # endregion
+#endregion
