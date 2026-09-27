@@ -16,7 +16,8 @@ def error(page: ft.Page,type_error="0",show_start_page_callback=None)->None:
     page.theme_mode = "dark"
     # endregion
 
-    # Determine the message based on the error code
+    # region Error Handling
+    # Determining the error message based on the error code
     error_message = "An unknown error occurred."
     if type_error == "u1":
         error_message = (
@@ -26,22 +27,25 @@ def error(page: ft.Page,type_error="0",show_start_page_callback=None)->None:
         error_message = (
                     "Failed user creation - Error:u2"
                 )
-
-    # Define what happens when they click "Back to Home"
+    #endregion
+    
+    # region Back Route Handling
+    # Define what happens when user clicks "Back to Home"
     def go_back_home(e):
         if show_start_page_callback:
             page.clean()
             show_start_page_callback(page)
         else:
             return
+    # endregion
 
-    # Add your visual elements and the button to the page
+    # region Page Design
     page.add(
         ft.Text(
             error_message, color=ft.Colors.RED_400, size=16, weight="bold"
         ),
         ft.Button(content="Back to Home",icon=ft.Icons.ARROW_BACK, on_click=lambda e: go_back_home(page))
     )
-
+    # endregion
     page.update()
 #endregion

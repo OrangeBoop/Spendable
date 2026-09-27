@@ -33,7 +33,7 @@ def show_start_page(page: ft.Page) -> None:
     # Buttons:
     add_expense_btn = ft.FilledButton(
         content="Create Local User",
-        # Calls the sign-up function imported from your other file and passes the page + callback
+        # Calls the sign-up function imported the signup_page file and passes the page + callback
         on_click=lambda e: render_signup_page(page, show_start_page),
         icon=ft.Icons.ADD_CIRCLE_OUTLINE,
         width=260,
@@ -46,7 +46,7 @@ def show_start_page(page: ft.Page) -> None:
     )
 #endregion
 
-# region Creating StartPage Design
+# region StartPage Design
     page.add(
         ft.Container(
             content=ft.Column(

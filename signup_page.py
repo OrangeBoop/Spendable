@@ -10,6 +10,7 @@ from errorpage import error
 def render_signup_page(page: ft.Page, show_start_page_callback) -> None:
     page.clean()
     page.theme_mode='dark'
+    page.title="Create Spender"
 
     # region Setting up our fields
     text_username: ft.TextField = ft.TextField(
@@ -150,18 +151,18 @@ def render_signup_page(page: ft.Page, show_start_page_callback) -> None:
                     controls=[
                         ft.Text("By creating an account, you agree to:", size=16, weight=ft.FontWeight.BOLD),
                         ft.Text(
-                            "• Allow us to judge your username silently.\n"
-                            "• Surrender 3 imaginary goats upon request.\n"
-                            "• Never microwave the database.\n"
-                            "• Accept that our servers may be emotionally unavailable.\n"
-                            "• Give us permission to blame bugs on Greg.\n"
-                            "• Acknowledge that 'password123' is a crime.\n"
-                            "• Fight at least one goose per calendar year.\n"
-                            "• Accept absolutely no responsibility for the goose.\n"
-                            "• Understand that pressing this button creates an account.",
+                            " - Allow us to judge your username silently.\n"
+                            " -  Surrender 3 imaginary goats upon request.\n"
+                            " -  Never microwave the database.\n"
+                            " -  Accept that our servers may be emotionally unavailable.\n"
+                            " -  Give us permission to blame bugs on Greg.\n"
+                            " -  Acknowledge that 'password123' is a crime.\n"
+                            " -  Fight at least one goose per calendar year.\n"
+                            " -  Accept absolutely no responsibility for the goose.\n"
+                            " -  Understand that pressing this button creates an account.",
                             size=14,
                         ),
-                        ft.Text("⚠️ These terms are legally questionable.", size=11, italic=True),
+                        ft.Text(" These terms are legally questionable.", size=11, italic=True),
                     ],
                     spacing=6,
                     scroll=ft.ScrollMode.AUTO,
